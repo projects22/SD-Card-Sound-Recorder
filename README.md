@@ -1,2 +1,5 @@
 # SD-Card-Sound-Recorder
-SD card and pic16f690 sound recorder, records sound and playback.
+The PIC16F690's ADC digitizes the sound and store it in the SD or SDHC card. The firmware works for SD or SDHC cards only. Do not use SDXC cards with this project because some of them work on 1.8V drive. The code detects whether the card is SD or SDHC and selects the proper addressing system for the card.
+The PIC's CCP is used as a DAC to convert the digital data back to audio. The sound is converted to 20KHz 8 bits mono in a format similar to .wav files. The quality of the audio is reasonable.
+SD card interface the PIC in SPI mode. Reading and writing data is in multi-blocks. Memory is used at the rate of 20KB/s. The Error LED indicates error sent by the SD card. The software doesn't use any file system, it just uses absolute memory addresses (raw). Since the programme is less than 680 bytes there is much resources left for adding features.
+Audio input is 1Vp-p , you can use the mic circuit or other source. The CCP in PWM mode gives 20KHz wave with duty cycle modulated to the audio amplitude. A low pass filter removes the 20KHz component. A simple 2 transistors amplifier boosts the power to drive 32 Ohm speaker or headphones. 
